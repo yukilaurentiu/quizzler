@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/question.dart';
 
 void main() => runApp(const Quizzler());
 
@@ -38,13 +39,14 @@ class _QuizPageState extends State<QuizPage> {
     ),
   ];
 
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
+  List<Question> questions = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: true),
+    Question(q: 'A slug\'s blood is green.', a: true)
   ];
 
-  List<bool> answers = [false, true, true];
   int questionNum = 0;
 
   @override
@@ -59,7 +61,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNum],
+                questions[questionNum].questionText,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -85,11 +87,12 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true
-                bool correctAnswer = answers[questionNum];
-                if(correctAnswer == true){
-                  print('right');
+                bool correctAnswer = questions[questionNum].questionAnswer;
+                if (correctAnswer == true) {
+                  print(questions[0].questionText);
                 } else {
-                  print('wrong');
+                  print('test');
+                  print(questions[0].questionText);
                 }
                 setState(() {
                   questionNum++;
@@ -117,11 +120,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool correctAnswer = answers[questionNum];
-                if(correctAnswer == false){
-                  print('right');
+                bool correctAnswer = questions[questionNum].questionAnswer;
+                if (correctAnswer == false) {
+                  print(questions[0]);
                 } else {
-                  print('wrong');
+                  print(questions[0]);
                 }
                 setState(() {
                   questionNum++;
