@@ -44,7 +44,9 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.',
   ];
 
+  List<bool> answers = [false, true, true];
   int questionNum = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,7 +56,7 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
                 questions[questionNum],
@@ -82,6 +84,13 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                //The user picked true
+                bool correctAnswer = answers[questionNum];
+                if(correctAnswer == true){
+                  print('right');
+                } else {
+                  print('wrong');
+                }
                 setState(() {
                   questionNum++;
                   scoreKeeper.add(
@@ -108,6 +117,12 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                bool correctAnswer = answers[questionNum];
+                if(correctAnswer == false){
+                  print('right');
+                } else {
+                  print('wrong');
+                }
                 setState(() {
                   questionNum++;
                   scoreKeeper.add(scoreKeeper[1]);
