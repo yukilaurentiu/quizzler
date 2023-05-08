@@ -41,7 +41,7 @@ class _QuizPageState extends State<QuizPage> {
     ),
   ];
 
-  int questionNum = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questions[questionNum].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -81,14 +81,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true
-                bool correctAnswer = quizBrain.questions[questionNum].questionAnswer;
+                bool correctAnswer = quizBrain.getAnswer();
                 if (correctAnswer == true) {
                   print('right');
                 } else {
                   print('wrong');
                 }
                 setState(() {
-                  questionNum++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     scoreKeeper[0],
                   );
@@ -113,14 +113,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool correctAnswer = quizBrain.questions[questionNum].questionAnswer;
+                bool correctAnswer = quizBrain.getAnswer();
                 if (correctAnswer == false) {
                   print('right');
                 } else {
                   print('wrong');
                 }
                 setState(() {
-                  questionNum++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(scoreKeeper[1]);
                 });
               },
