@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -49,8 +50,28 @@ class _QuizPageState extends State<QuizPage> {
           ),
         );
       }
-
-      quizBrain.nextQuestion();
+      if (quizBrain.isFinished() == true) {
+        quizBrain.reset();
+        scoreKeeper = [];
+        Alert(
+          context: context,
+          type: AlertType.warning,
+          title: "quizzler",
+          desc: "you've reached the last quiz!",
+          buttons: [
+            DialogButton(
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+              child: const Text(
+                "RESTART",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            )
+          ],
+        ).show();
+      } else {
+        quizBrain.nextQuestion();
+      }
     });
   }
 
